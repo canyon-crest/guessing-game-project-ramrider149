@@ -4,6 +4,7 @@ date.textContent=time();
 // global variables
 let score, answer, level;
 const levelArr = document.getElementsByName("level")
+const scoreArr = [];
 // event listeners
 playBtn.addEventListener("click", play); 
 guessBtn.addEventListener("click", makeGuess);
@@ -48,6 +49,34 @@ function makeGuess(){
     }
     else{
         msg.textContent = "CORRECT! It took " + score + " tries.";
+        reset();
+        updateScore();
     }
-
+}
+    function reset(){
+        guessBtn.disabled = true;
+        guess.value = "";
+        guess.placeholder = "";
+        guess.disabled= true;
+        playBtn.disabled = false;
+        for(let i=0; i< levelArr.length; i++){
+            levelArr[i].disabled = false;
+        }
+        }
+    
+    function updateScore(){
+        scoreArr.push(score); // adds current score to array of scores
+        wins.textContent = "Total Wins: " + scoreArr.length;
+        let sum = 0;
+        scoreArr.sort((a, b) => a - b); // sorts accending
+        // leaderboard?
+        const lb = document.getElementsByName("leaderboard");
+        for(let i=0; i<scoreArr.length; i++){
+            sum+= scoreArr[i];
+            if(i < lb.length){
+                lb[i].textContent = scoreArr[i];
+            }
+        }
+    let avg = sum/scoreArr.length;
+    avgScore.textContent = "Average Score: " + avg.toFixed(2);
 }
