@@ -1,33 +1,108 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JavaScript Number Guessing Game</title>
+    <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
   </head>
   <body>
-    <p id="date"></p>
+    <div class="container">
+      <header>
+        <h1> Number Guessing Game</h1>
+        <p id="date" class="date-time"></p>
+      </header>
 
-    <h3>Level</h3>
-    <input type="radio" name="level" id="e" value="3" checked><label for="e">Easy</label>
-    <input type="radio" name="level" id="m" value="10"><label for="m">Medium</label>
-    <input type="radio" name="level" id="h" value="100"><label for="h">Hard</label>
+      <section class="name-section">
+        <h2>Player Setup</h2>
+        <div class="input-group">
+          <input type="text" id="nameInput" placeholder="Enter your name" class="input-field">
+          <button id="setNameBtn" class="btn btn-primary">Set Name</button>
+        </div>
+        <p id="welcomeMsg" class="welcome-text"></p>
+      </section>
 
-    <button id="playBtn">Play</button>
+      <section class="game-setup">
+        <h2>Select Difficulty</h2>
+        <div class="level-options">
+          <label class="radio-label">
+            <input type="radio" name="level" id="e" value="3" checked>
+            <span class="radio-custom">Easy (1-3)</span>
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="level" id="m" value="10">
+            <span class="radio-custom">Medium (1-10)</span>
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="level" id="h" value="100">
+            <span class="radio-custom">Hard (1-100)</span>
+          </label>
+        </div>
+        <button id="playBtn" class="btn btn-large btn-primary" disabled>Start Game</button>
+      </section>
 
-    <h3 id="msg">Select a Level</h3>
-    <input type="text" id="guess" disabled>
-    <button id="guessBtn" disabled>Guess</button>
-    <button id="giveUp" disabled>Give Up</button>
+      <section class="game-area">
+        <h2 id="msg" class="game-message">Enter your name to start</h2>
+        <div class="guess-controls">
+          <input type="text" id="guess" class="input-field guess-input" placeholder="Enter your guess" disabled>
+          <button id="guessBtn" class="btn btn-success" disabled>Guess</button>
+        </div>
+        
+        <div class="hint-section">
+          <button id="hintBtn" class="btn btn-hint" disabled>💡 Use Hint (<span id="hintCount">3</span> left)</button>
+          <p id="hintMsg" class="hint-message"></p>
+        </div>
 
-    <h3>Stats</h3>
-    <p id="wins">Total wins: 0</p>
-    <p id="avgScore">Average Score: </p>
+        <div class="action-buttons">
+          <button id="giveUp" class="btn btn-danger" disabled>Give Up</button>
+        </div>
 
-    <h3>Leaderboard</h3>
-    <ol>
-      <li name="leaderboard">100</li>
-      <li name="leaderboard">100</li>
-      <li name="leaderboard">100</li>
-    </ol>
+        <p id="tempHint" class="temp-hint"></p>
+        <p id="roundTimer" class="round-timer"></p>
+      </section>
+
+      <section class="stats-section">
+        <h2>Statistics</h2>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">Total Wins</div>
+            <div class="stat-value" id="wins">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Average Score</div>
+            <div class="stat-value" id="avgScore">-</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Fastest Game</div>
+            <div class="stat-value" id="fastestGame">-</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Avg Time</div>
+            <div class="stat-value" id="avgTime">-</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="leaderboard-section">
+        <h2>Leaderboard (Best Scores)</h2>
+        <ol class="leaderboard-list">
+          <li name="leaderboard">-</li>
+          <li name="leaderboard">-</li>
+          <li name="leaderboard">-</li>
+        </ol>
+      </section>
+    </div>
+    <!-- Streak Counter -->
+<section class="streak-section">
+  <h2> Current Streak</h2>
+  <div class="streak-display">
+    <span id="currentStreak" class="streak-number">0</span>
+    <span class="streak-label">consecutive wins</span>
+  </div>
+  <div class="best-streak">
+    Best Streak: <span id="bestStreak">0</span>
+  </div>
+</section>
   </body>
 </html>
